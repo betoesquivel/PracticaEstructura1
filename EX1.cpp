@@ -147,6 +147,7 @@ bool ListaDEC<T>::Insertar(T dato)
 		aux->ant = externo;
 		externo->sig->ant = aux;
 		externo->sig = aux;
+		externo = aux; //esta linea la inserte yo, no se si esta bien o mal.
 	}
 	return true;
 }
@@ -240,6 +241,28 @@ ListaDEC<T>::~ListaDEC()
 }
 //PILA DOBLEMENTE ENCADENADA====================================
 
+template <class T>
+class DobleFila:private ListaDEC<T>
+{
+	public:
+		DobleFila(){ListaDEC<T>::ListaDEC();}
+		bool METERFRENTE(T dato)
+		{
+			ListaDEC<T>::ROTAR(1);
+			bool exito = ListaDEC<T>::insertar(dato);
+			ListaDEC<T>::ROTAR(-1);
+			return exito;
+		}
+		bool SACARFRENTE(){return ListaDEC<T>::SACAR_FILA();}
+		
+		bool METERFINAL(T dato)
+		{
+			return ListaDEC<T>::insertar(dato);
+		}
+		bool SACARFINAL(){return ListaDEC<T>::SACAR_PILA();}
+		
+		~DobleFila(){ListaDEC<T>::~ListaDEC();}
+};
 int main()
 {
 	/* PARA PROBAR LA COLA PRIORIZADA
