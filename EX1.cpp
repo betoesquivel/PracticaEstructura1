@@ -147,17 +147,16 @@ bool ListaDEC<T>::Insertar(T dato)
 		aux->ant = externo;
 		externo->sig->ant = aux;
 		externo->sig = aux;
-		externo = aux; //esta linea la inserte yo, no se si esta bien o mal.
 	}
 	return true;
 }
 
 template <class T>
-bool ListaDEC<T>::SACAR_PILA()
+bool ListaDEC<T>::SACAR_FILA()
 {
 	if (externo == NULL)
 	{ 
-		//la pila esta vacia
+		//la fila esta vacia
 		return false;
 	}
 	else
@@ -176,12 +175,16 @@ bool ListaDEC<T>::SACAR_PILA()
 	return true;
 }
 
+//Tengo que volver a checar lo que hice en el examen. Dibuja la lista doblemente encadenada
+//y luego checa por donde estoy insertando, y por ahi debo de sacar. Luego debo de ver donde 
+//estaba insertando otra vez, y hacer sacar fila, del externo.
+//creo que ya lo arregle
 template <class T>
-bool ListaDEC<T>::SACAR_FILA()
+bool ListaDEC<T>::SACAR_PILA()
 {
 	if (externo == NULL)
 	{ 
-		//la fila esta vacia
+		//la pila esta vacia
 		return false;
 	}
 	else
@@ -229,7 +232,7 @@ ListaDEC<T>::~ListaDEC()
 {
 	if (externo != NULL)
 	{
-		externo->ant->sig= NULL;
+		externo->ant->sig = NULL;
 		Nodo<T> *aux = externo;
 		while (aux != NULL)
 		{
